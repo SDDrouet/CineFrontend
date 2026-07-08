@@ -9,8 +9,7 @@ import MovieDetail from "@/pages/public/MovieDetail";
 import Login from "@/pages/auth/Login";
 import Register from "@/pages/auth/Register";
 import Dashboard from "@/pages/app/Dashboard";
-import SeatSelection from "@/pages/app/SeatSelection";
-import BookingSummary from "@/pages/app/BookingSummary";
+import BookingWizard from "@/pages/app/BookingWizard";
 import Ticket from "@/pages/app/Ticket";
 import MyReservations from "@/pages/app/MyReservations";
 import PublicRoute from "./PublicRoute";
@@ -45,8 +44,7 @@ export default function AppRouter() {
         }
       >
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="reserva/:showtimeId" element={<SeatSelection />} />
-        <Route path="reserva/:showtimeId/resumen" element={<BookingSummary />} />
+        <Route path="reserva/:movieId" element={<BookingWizard />} />
         <Route path="boletos/:reservationId" element={<Ticket />} />
         <Route path="mis-reservas" element={<MyReservations />} />
       </Route>

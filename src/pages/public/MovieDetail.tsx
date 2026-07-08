@@ -27,13 +27,14 @@ export default function MovieDetail() {
     (acc[st.date] ??= []).push(st);
     return acc;
   }, {});
+  const hasShowtimes = movieShowtimes.length > 0;
 
-  const handleReservar = (showtimeId: string) => {
+  const handleReservar = () => {
     if (!isAuthenticated) {
-      navigate("/auth/login", { state: { from: `/app/reserva/${showtimeId}` } });
+      navigate("/auth/login", { state: { from: `/app/reserva/${movie.id}` } });
       return;
     }
-    navigate(`/app/reserva/${showtimeId}`);
+    navigate(`/app/reserva/${movie.id}`);
   };
 
   return (
@@ -52,9 +53,13 @@ export default function MovieDetail() {
           </div>
           <p className="mt-4 text-zinc-600">{movie.description}</p>
 
-          <div className="mt-8 space-y-6">
-            <h2 className="text-lg font-semibold">Funciones disponibles</h2>
-            {Object.keys(byDate).length === 0 && (
+          <Button className="mt-6" size="lg" disabled={!hasShowtimes} onClick={handleReservar}>
+            {hasShowtimes ? "Reservar boletos" : "Sin funciones disponibles"}
+          </Button>
+
+          <div className="mt-8 space-y-4">
+            <h2 className="text-lg font-semibold">Funciones programadas</h2>
+            {!hasShowtimes && (
               <p className="text-sm text-zinc-500">Aún no hay funciones programadas.</p>
             )}
             {Object.entries(byDate).map(([date, sts]) => (
@@ -66,9 +71,9 @@ export default function MovieDetail() {
                   {sts.map((st) => {
                     const room = rooms.find((r) => r.id === st.roomId);
                     return (
-                      <Button key={st.id} variant="outline" className="gap-2" onClick={() => handleReservar(st.id)}>
-                        <Clock className="h-4 w-4" /> {st.startTime} · {room?.name}
-                      </Button>
+                      <span key={st.id} className="flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm text-zinc-600">
+                        <Clock className="h-3.5 w-3.5" /> {st.startTime} · {room?.name}
+                      </span>
                     );
                   })}
                 </div>
