@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <section className="mb-10 rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-900 to-amber-950 px-8 py-14 text-white">
+      <section className="mb-10 rounded-2xl bg-linear-to-br from-zinc-900 via-zinc-900 to-amber-950 px-8 py-14 text-white">
         <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">
           En cartelera
         </p>
