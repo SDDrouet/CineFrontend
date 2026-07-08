@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
-    return <>
-        <h1 className="text-3xl">Login</h1>;
-        <Link to="/">Inicio</Link>
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-        <Link to="/auth/register">
-            Registro
-        </Link>
+  const handleLogin = () => {
+    login();
+    navigate("/app/dashboard");
+  };
 
-        <Link to="/app/dashboard">
-            Dashboard
-        </Link>
-    </>
+  return (
+    <Button onClick={handleLogin}>
+      Iniciar sesión
+    </Button>
+  );
 }

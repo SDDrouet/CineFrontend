@@ -1,27 +1,41 @@
-import { Link } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
 
 export default function Navbar() {
-  return (
-    <header className="border-b p-4">
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
-      <nav className="flex gap-4">
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
 
-        <Link to="/">Inicio</Link>
+    return (
+        <header className="border-b p-4">
 
-        <Link to="/auth/login">
-          Login
-        </Link>
+            <nav className="flex gap-4">
 
-        <Link to="/auth/register">
-          Registro
-        </Link>
+                <Link to="/">Inicio</Link>
 
-        <Link to="/app/dashboard">
-          Dashboard
-        </Link>
+                <Link to="/auth/login">
+                    Login
+                </Link>
 
-      </nav>
+                <Link to="/auth/register">
+                    Registro
+                </Link>
 
-    </header>
-  );
+                <Link to="/app/dashboard">
+                    Dashboard
+                </Link>
+
+                <Button onClick={handleLogout}>
+                    Cerrar sesión
+                </Button>
+
+            </nav>
+
+        </header>
+    );
 }
