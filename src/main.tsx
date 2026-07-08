@@ -6,12 +6,15 @@ import "./index.css";
 import App from "./App";
 
 import { AuthProvider } from "@/context/AuthContext";
+import { BookingProvider } from "./context/BookingContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <BookingProvider>
+          <App />
+        </BookingProvider>
       </AuthProvider>
     </BrowserRouter>
   </StrictMode>

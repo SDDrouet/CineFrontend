@@ -5,46 +5,51 @@ import AuthLayout from "@/templates/AuthLayout";
 import AppLayout from "@/templates/AppLayout";
 
 import Home from "@/pages/public/Home";
+import MovieDetail from "@/pages/public/MovieDetail";
 import Login from "@/pages/auth/Login";
 import Register from "@/pages/auth/Register";
 import Dashboard from "@/pages/app/Dashboard";
+import SeatSelection from "@/pages/app/SeatSelection";
+import BookingSummary from "@/pages/app/BookingSummary";
+import Ticket from "@/pages/app/Ticket";
+import MyReservations from "@/pages/app/MyReservations";
 import PublicRoute from "./PublicRoute";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRouter() {
-    return (
-        <Routes>
+  return (
+    <Routes>
+      <Route element={<PublicLayout />}>
+        <Route index element={<Home />} />
+        <Route path="peliculas/:movieId" element={<MovieDetail />} />
+      </Route>
 
-            {/* Públicas */}
-            <Route element={<PublicLayout />}>
-                <Route index element={<Home />} />
-            </Route>
+      <Route
+        path="/auth"
+        element={
+          <PublicRoute>
+            <AuthLayout />
+          </PublicRoute>
+        }
+      >
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+      </Route>
 
-            {/* Login */}
-            <Route
-                path="/auth"
-                element={
-                    <PublicRoute>
-                        <AuthLayout />
-                    </PublicRoute>
-                }
-            >
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
-            </Route>
-
-            {/* Usuario autenticado */}
-            <Route
-                path="/app"
-                element={
-                    <ProtectedRoute>
-                        <AppLayout />
-                    </ProtectedRoute>
-                }
-            >
-                <Route path="dashboard" element={<Dashboard />} />
-            </Route>
-
-        </Routes>
-    );
+      <Route
+        path="/app"
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="reserva/:showtimeId" element={<SeatSelection />} />
+        <Route path="reserva/:showtimeId/resumen" element={<BookingSummary />} />
+        <Route path="boletos/:reservationId" element={<Ticket />} />
+        <Route path="mis-reservas" element={<MyReservations />} />
+      </Route>
+    </Routes>
+  );
 }

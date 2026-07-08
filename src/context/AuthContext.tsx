@@ -7,6 +7,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  isAuthenticated: boolean;
   login: () => void;
   logout: () => void;
 }
@@ -31,10 +32,13 @@ export function AuthProvider({
     setUser(null);
   };
 
+  const isAuthenticated = user !== null;
+
   return (
     <AuthContext.Provider
       value={{
         user,
+        isAuthenticated,
         login,
         logout,
       }}
