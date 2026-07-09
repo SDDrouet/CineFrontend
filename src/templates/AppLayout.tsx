@@ -3,22 +3,46 @@ import { Outlet } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 
+import {
+  SidebarProvider,
+  SidebarInset,
+} from "@/components/ui/sidebar";
+
+
 export default function AppLayout() {
+
   return (
-    <div className="min-h-screen">
 
-      <Navbar />
+    <SidebarProvider>
 
-      <div className="flex">
+      <div className="min-h-screen w-full">
 
-        <Sidebar />
 
-        <main className="flex-1 p-6">
-          <Outlet />
-        </main>
+        <Navbar />
+
+
+        <div className="flex">
+
+
+          <Sidebar />
+
+
+          <SidebarInset>
+
+            <main className="flex-1 p-6">
+              <Outlet />
+            </main>
+
+          </SidebarInset>
+
+
+        </div>
+
 
       </div>
 
-    </div>
+
+    </SidebarProvider>
+
   );
 }

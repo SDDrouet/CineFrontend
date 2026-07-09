@@ -21,7 +21,7 @@ export default function MyReservations() {
     return (
       <div className="py-16 text-center">
         <p className="text-zinc-500">Todavía no tienes reservas.</p>
-        <Link to="/" className="text-amber-600 underline">Explorar cartelera</Link>
+        <Link to="/app/dashboard" className="text-amber-600 underline">Explorar cartelera</Link>
       </div>
     );
   }

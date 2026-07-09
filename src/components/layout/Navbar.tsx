@@ -23,14 +23,12 @@ export default function Navbar() {
         <div className="flex items-center gap-4 text-sm">
           {isAuthenticated ? (
             <>
-              <Link to="/app/dashboard">Dashboard</Link>
-              <Link to="/app/mis-reservas">Mis reservas</Link>
               <Button size="sm" variant="outline" onClick={handleLogout}>Cerrar sesión</Button>
             </>
           ) : (
             <>
-              <Link to="/auth/login">Login</Link>
-              <Link to="/auth/register">Registro</Link>
+              <Link to="/auth/login">Iniciar sesión</Link>
+              <Link to="/auth/register">Registrarse</Link>
             </>
           )}
         </div>

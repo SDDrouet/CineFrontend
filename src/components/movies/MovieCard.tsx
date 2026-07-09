@@ -9,7 +9,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
       to={`/peliculas/${movie.id}`}
       className="group overflow-hidden rounded-xl border transition hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="aspect-[2/3] overflow-hidden bg-zinc-100">
+      <div className="aspect-2/3 overflow-hidden bg-zinc-100">
         <img
           src={movie.posterUrl}
           alt={movie.name}

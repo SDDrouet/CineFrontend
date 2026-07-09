@@ -7,13 +7,16 @@ import App from "./App";
 
 import { AuthProvider } from "@/context/AuthContext";
 import { BookingProvider } from "./context/BookingContext";
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <BookingProvider>
-          <App />
+          <TooltipProvider>
+            <App />
+          </TooltipProvider>
         </BookingProvider>
       </AuthProvider>
     </BrowserRouter>
