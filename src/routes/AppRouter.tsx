@@ -18,7 +18,12 @@ import ProtectedRoute from "./ProtectedRoute";
 export default function AppRouter() {
   return (
     <Routes>
-      <Route element={<PublicLayout />}>
+      <Route element={
+        <PublicRoute>
+          <PublicLayout />
+        </PublicRoute>
+      }
+      >
         <Route index element={<Home />} />
         <Route path="peliculas/:movieId" element={<MovieDetail />} />
       </Route>
@@ -47,6 +52,7 @@ export default function AppRouter() {
         <Route path="reserva/:movieId" element={<BookingWizard />} />
         <Route path="boletos/:reservationId" element={<Ticket />} />
         <Route path="mis-reservas" element={<MyReservations />} />
+        <Route path="peliculas/:movieId" element={<MovieDetail />} />
       </Route>
     </Routes>
   );

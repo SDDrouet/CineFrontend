@@ -1,11 +1,11 @@
 import {
   LayoutDashboard,
   Ticket,
-  Film,
+  Clapperboard,
   LogOut,
 } from "lucide-react";
 
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import {
   Sidebar as ShadcnSidebar,
@@ -18,6 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuth } from "@/context/AuthContext";
 
 const menuItems = [
   {
@@ -34,6 +35,13 @@ const menuItems = [
 
 export default function Sidebar() {
   const location = useLocation();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <ShadcnSidebar
@@ -45,7 +53,7 @@ export default function Sidebar() {
       {/* Header */}
       <div className="flex h-16 items-center gap-3 border-b px-4">
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500">
-          <Film className="h-5 w-5 text-white" />
+          <Clapperboard className="h-5 w-5 text-white" />
         </div>
 
         <div className="group-data-[collapsible=icon]:hidden">
@@ -124,6 +132,7 @@ export default function Sidebar() {
 
             <SidebarMenuButton
               tooltip="Cerrar sesión"
+              onClick={handleLogout}
             >
 
               <LogOut />

@@ -57,27 +57,6 @@ export default function Footer() {
                         >
                             Cartelera
                         </a>
-
-                        <a
-                            href="/login"
-                            className="transition-colors hover:text-amber-400"
-                        >
-                            Iniciar sesión
-                        </a>
-
-                        <a
-                            href="#"
-                            className="transition-colors hover:text-amber-400"
-                        >
-                            Términos y condiciones
-                        </a>
-
-                        <a
-                            href="#"
-                            className="transition-colors hover:text-amber-400"
-                        >
-                            Política de privacidad
-                        </a>
                     </nav>
                 </div>
             </div>

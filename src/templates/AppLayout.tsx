@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 
-import Navbar from "@/components/layout/Navbar";
 import Sidebar from "@/components/layout/Sidebar";
 
 import {
@@ -16,10 +15,6 @@ export default function AppLayout() {
     <SidebarProvider>
 
       <div className="min-h-screen w-full">
-
-
-        <Navbar />
-
 
         <div className="flex">
 

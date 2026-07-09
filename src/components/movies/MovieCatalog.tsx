@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { movies, showtimes } from "@/data/mockData";
 import MovieCard from "./MovieCard";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/context/AuthContext";
 
 const GENRES = Array.from(new Set(movies.flatMap((m) => m.genres))).sort();
 const CLASSIFICATIONS = Array.from(
@@ -30,6 +31,7 @@ export default function MovieCatalog({
   subtitle,
   badge = "En cartelera",
 }: MovieCatalogProps) {
+  const { isAuthenticated } = useAuth();
   const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [classification, setClassification] = useState("");
@@ -131,7 +133,7 @@ export default function MovieCatalog({
       ) : (
         <section className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
           {filteredMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard key={movie.id} movie={movie} isAuthenticated={isAuthenticated} />
           ))}
         </section>
       )}

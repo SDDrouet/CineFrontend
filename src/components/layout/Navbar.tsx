@@ -13,8 +13,8 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b bg-white/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <header className="sticky top-0 z-10 border-b bg-white/90 backdrop-blur min-h-16">
+      <nav className="flex items-center justify-between w-full h-16 px-4 md:px-6 lg:px-8">
         <Link to="/" className="flex items-center gap-2 font-bold">
           <Clapperboard className="h-5 w-5 text-amber-600" />
           CineReserva
@@ -27,8 +27,12 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <Link to="/auth/login">Iniciar sesión</Link>
-              <Link to="/auth/register">Registrarse</Link>
+              <Button size="sm" variant="outline">
+                <Link to="/auth/login">Iniciar sesión</Link>
+              </Button>
+              <Button size="sm">
+                <Link to="/auth/register">Registrate</Link>
+              </Button>
             </>
           )}
         </div>

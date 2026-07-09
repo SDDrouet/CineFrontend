@@ -3,10 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import type { Movie } from "@/types";
 import { formatDuration } from "@/lib/format";
 
-export default function MovieCard({ movie }: { movie: Movie }) {
+export default function MovieCard({ movie, isAuthenticated }: { movie: Movie; isAuthenticated: boolean }) {
   return (
     <Link
-      to={`/peliculas/${movie.id}`}
+      to={isAuthenticated ? `/app/peliculas/${movie.id}` : `/peliculas/${movie.id}`}
       className="group overflow-hidden rounded-xl border transition hover:-translate-y-1 hover:shadow-lg"
     >
       <div className="aspect-2/3 overflow-hidden bg-zinc-100">
