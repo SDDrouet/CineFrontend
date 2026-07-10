@@ -3,6 +3,52 @@ export type SectionType = "VIP" | "DBOX" | "GENERAL";
 export type MovieStatus = "CARTELERA" | "PROXIMAMENTE" | "FINALIZADA";
 export type ReservationStatus = "PENDIENTE" | "CONFIRMADA" | "CANCELADA";
 
+export type AuthTokenType = "ACCESS" | "REFRESH";
+
+export interface JwtAuthPayload {
+  sub: string;
+  username: string;
+  version: number;
+  type: AuthTokenType;
+  iat: number;
+  exp: number;
+}
+
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface TokenResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface PersonResponse {
+  id: string;
+  dni: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  nationality: string;
+  active: boolean;
+}
+
+export interface UserResponse {
+  id: string;
+  username: string;
+  person: PersonResponse;
+  active: boolean;
+  roles: string[];
+  lastLogin: string | null;
+  createdAt: string;
+}
+
+export type AuthUser = UserResponse;
+
 export interface Movie {
   id: string;
   name: string;

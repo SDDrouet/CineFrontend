@@ -6,7 +6,11 @@ interface Props {
 }
 
 export default function PublicRoute({ children }: Props) {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return null;
+  }
 
   if (user) {
     return <Navigate to="/app/dashboard" replace />;

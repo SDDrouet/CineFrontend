@@ -11,11 +11,25 @@ export default function Login() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formError, setFormError] = useState<string | null>(null);
 
-    const handleLogin = () => {
-        // Aquí posteriormente llamarás al API
-        login();
-        navigate("/app/dashboard");
+    const handleLogin = async () => {
+        setFormError(null);
+        setIsSubmitting(true);
+
+        try {
+            await login(username, password);
+            navigate("/app/dashboard");
+        } catch (error) {
+            setFormError(
+                error instanceof Error
+                    ? error.message
+                    : "No fue posible iniciar sesión",
+            );
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -37,6 +51,12 @@ export default function Login() {
                 </div>
 
                 <div className="space-y-5">
+                    {formError ? (
+                        <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            {formError}
+                        </div>
+                    ) : null}
+
                     <div>
                         <label className="mb-2 block text-sm font-medium">
                             Usuario
@@ -64,9 +84,10 @@ export default function Login() {
 
                     <Button
                         className="w-full"
+                        disabled={isSubmitting}
                         onClick={handleLogin}
                     >
-                        Iniciar sesión
+                        {isSubmitting ? "Iniciando sesión..." : "Iniciar sesión"}
                     </Button>
                 </div>
 
