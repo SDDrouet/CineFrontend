@@ -3,6 +3,13 @@ import { movies, showtimes } from "@/data/mockData";
 import MovieCard from "./MovieCard";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/context/AuthContext";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const GENRES = Array.from(new Set(movies.flatMap((m) => m.genres))).sort();
 const CLASSIFICATIONS = Array.from(
@@ -32,6 +39,7 @@ export default function MovieCatalog({
   badge = "En cartelera",
 }: MovieCatalogProps) {
   const { isAuthenticated } = useAuth();
+
   const [name, setName] = useState("");
   const [genre, setGenre] = useState("");
   const [classification, setClassification] = useState("");
@@ -67,9 +75,7 @@ export default function MovieCatalog({
           {title}
         </h1>
 
-        <p className="mt-4 max-w-xl text-zinc-300">
-          {subtitle}
-        </p>
+        <p className="mt-4 max-w-xl text-zinc-300">{subtitle}</p>
       </section>
 
       <section className="mb-8 grid grid-cols-1 gap-3 rounded-xl border p-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -107,9 +113,8 @@ export default function MovieCatalog({
           ))}
         </select>
 
-        <input
+        <Input
           type="date"
-          className="rounded-md border px-3 py-2 text-sm"
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
@@ -131,10 +136,33 @@ export default function MovieCatalog({
           No encontramos películas con esos filtros.
         </p>
       ) : (
-        <section className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
-          {filteredMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} isAuthenticated={isAuthenticated} />
-          ))}
+        <section className="relative px-14">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: filteredMovies.length > 3,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {filteredMovies.map((movie) => (
+                <CarouselItem
+                  key={movie.id}
+                  className="pl-4 basis-full md:basis-1/2 lg:basis-1/3 flex"
+                >
+                  <div className="w-full">
+                    <MovieCard
+                      movie={movie}
+                      isAuthenticated={isAuthenticated}
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselPrevious className="-left-6 h-11 w-11" />
+            <CarouselNext className="-right-6 h-11 w-11" />
+          </Carousel>
         </section>
       )}
     </>
